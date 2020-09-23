@@ -34,13 +34,6 @@
     enabled: yes
   when: traefik_update | bool == True
 
-- name: Unarchive a file that needs to be downloaded (added in 2.0)
-  unarchive:
-    src: https://example.com/example.zip
-    dest: /usr/local/bin
-    remote_src: yes
-
-
 - name: Download Traefik binary
   unarchive:
     src: "{{ item.url }}"
