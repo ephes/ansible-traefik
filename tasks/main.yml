@@ -34,17 +34,28 @@
     enabled: yes
   when: traefik_update | bool == True
 
+- name: Unarchive a file that needs to be downloaded (added in 2.0)
+  unarchive:
+    src: https://example.com/example.zip
+    dest: /usr/local/bin
+    remote_src: yes
+
+
 - name: Download Traefik binary
-  get_url:
-    url: "{{ item.url }}"
+  unarchive:
+    src: "{{ item.url }}"
     dest: "{{ item.dest }}"
-    owner: root
-    group: root
-    mode: 0755
-    force: "{{ traefik_update | bool }}"
+    remote_src: yes
   with_items:
     - url: "{{ traefik_binary_url }}"
       dest: "{{ traefik_bin_path }}"
+#  get_url:
+#    url: "{{ item.url }}"
+#    dest: "{{ item.dest }}"
+#    owner: root
+#    group: root
+#    mode: 0755
+#    force: "{{ traefik_update | bool }}"
 
 - name: Ensure traefik service is enabled and running
   systemd:
