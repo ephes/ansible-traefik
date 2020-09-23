@@ -44,6 +44,12 @@
       dest: "{{ traefik_download_dir }}"
   when: traefik_update | bool == True
 
+- name: Remove old traefik binary
+  file:
+    path: "{{ traefik_install_dir }}/traefik"
+    state: absent
+  when: traefik_update | bool == True
+
 - name: Move traefik binary to system path
   command: mv "{{ traefik_download_dir }}/traefik" "{{ traefik_install_dir }}"
   when: traefik_update | bool == True
