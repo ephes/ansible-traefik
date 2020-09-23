@@ -42,13 +42,11 @@
   with_items:
     - url: "{{ traefik_binary_url }}"
       dest: "{{ traefik_bin_path }}"
-#  get_url:
-#    url: "{{ item.url }}"
-#    dest: "{{ item.dest }}"
-#    owner: root
-#    group: root
-#    mode: 0755
-#    force: "{{ traefik_update | bool }}"
+  when: traefik_update | bool == True
+
+- name: Move traefik binary to system path
+  command: mv "{{ traefik_bin_path }}/traefik" /usr/bin
+  when: traefik_update | bool == True
 
 - name: Ensure traefik service is enabled and running
   systemd:
