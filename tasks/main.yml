@@ -41,11 +41,11 @@
     remote_src: yes
   with_items:
     - url: "{{ traefik_binary_url }}"
-      dest: "{{ traefik_bin_path }}"
+      dest: "{{ traefik_download_dir }}"
   when: traefik_update | bool == True
 
 - name: Move traefik binary to system path
-  command: mv "{{ traefik_bin_path }}/traefik" /usr/bin
+  command: mv "{{ traefik_download_dir }}/traefik" "{{ traefik_install_dir }}"
   when: traefik_update | bool == True
 
 - name: Ensure traefik service is enabled and running
