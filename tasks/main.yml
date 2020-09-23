@@ -12,7 +12,7 @@
 
 - name: Ensure install & config directory exists
   file:
-    path: "{{ item }}/traefik"
+    path: "{{ item }}"
     state: directory
   with_items:
     - "{{ traefik_install_dir }}"
