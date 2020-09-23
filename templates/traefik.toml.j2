@@ -4,7 +4,21 @@
 #}
 logLevel = "INFO"
 
-[docker]
-endpoint = "unix:///var/run/docker.sock"
-domain = "localhost"
-watch = true
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+
+[acme]
+email = "jochen-traefik@wersdoerfer.de"
+storage = "acme.json"
+caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
+entryPoint = "https"
+  [acme.httpChallenge]
+  entryPoint = "http"
+
+[[acme.domains]]
+  main = "staging.wersdoerfer.de"
+  sans = ["test1.staging.wersdoerfer.de", "test2.staging.wersdoerfer.de"]
