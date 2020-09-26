@@ -1,24 +1,21 @@
-{#
-    Check traefik sample for full config options
-    https://raw.githubusercontent.com/containous/traefik/master/traefik.sample.toml
-#}
-logLevel = "INFO"
+[global]
+  checkNewVersion = true
+  sendAnonymousUsage = true
+
+[providers.file]
+  directory = "/etc/traefik/dynamic"
 
 [entryPoints]
-  [entryPoints.http]
-  address = ":80"
-  [entryPoints.https]
-  address = ":443"
-    [entryPoints.https.tls]
+  [entryPoints.web]
+    address = ":80"
 
-[acme]
-email = "jochen-traefik@wersdoerfer.de"
-storage = "acme.json"
-caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
-entryPoint = "https"
-  [acme.httpChallenge]
-  entryPoint = "http"
+  [entryPoints.web-secure]
+    address = ":443"
 
-[[acme.domains]]
-  main = "staging.wersdoerfer.de"
-  sans = ["test1.staging.wersdoerfer.de", "test2.staging.wersdoerfer.de"]
+[certificatesResolvers]
+  [letsencrypt]
+    [acme]
+      email = "jochen-traefik@wersdoerfer.de"
+      storage = "/etc/traefik/acme/acme.json"
+      [certificatesResolvers.letsencrypt.acme.httpChallenge]
+        entryPoint = "web"

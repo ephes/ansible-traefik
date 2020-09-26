@@ -15,8 +15,18 @@
     path: "{{ item }}"
     state: directory
   with_items:
+    - "{{ traefik_config_dir }}"
+    - "{{ traefik_config_dynamic_dir }}"
     - "{{ traefik_install_dir }}"
     - "{{ traefik_download_dir }}"
+
+- name: Copy acme.json file
+  template:
+    src: "{{ traefik_acme_template }}.j2"
+    dest: "{{ traefik_acme_file }}"
+    owner: root
+    group: root
+    mode: 0744
 
 - name: Copy traefik config file
   template:
