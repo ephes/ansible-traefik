@@ -17,6 +17,7 @@
   with_items:
     - "{{ traefik_config_dir }}"
     - "{{ traefik_config_dynamic_dir }}"
+    - "{{ traefik_config_acme_dir }}"
     - "{{ traefik_install_dir }}"
     - "{{ traefik_download_dir }}"
 

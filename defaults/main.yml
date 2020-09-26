@@ -6,7 +6,7 @@ traefik_binary_url: https://github.com/containous/traefik/releases/download/v2.2
 traefik_bin_path: "{{ traefik_install_dir }}/traefik"
 traefik_config_dir: /etc/traefik
 traefik_config_dynamic_dir: /etc/traefik/dynamic
-traefik_config_dynamic_dir: /etc/traefik/acme
+traefik_config_acme_dir: /etc/traefik/acme
 traefik_config_file: /etc/traefik/traefik.toml
 traefik_acme_file: /etc/traefik/acme/acme.json
 traefik_template: traefik.toml
