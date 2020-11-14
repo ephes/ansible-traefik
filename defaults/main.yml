@@ -8,6 +8,7 @@ traefik_config_dir: /etc/traefik
 traefik_config_dynamic_dir: /etc/traefik/dynamic
 traefik_config_acme_dir: /etc/traefik/acme
 traefik_config_file: /etc/traefik/traefik.toml
+traefik_dashboard_config_file: /etc/traefik/dynamic/dashboard.yml
 traefik_acme_file: /etc/traefik/acme/acme.json
 traefik_template: traefik.toml
 traefik_acme_template: acme.json

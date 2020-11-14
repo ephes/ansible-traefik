@@ -39,6 +39,14 @@
   notify:
     - Restart traefik
 
+- name: Copy traefik dynamic dashboard config file
+  template:
+    src: dashboard.yml.j2
+    dest: "{{ traefik_dashboard_config_file }}"
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Ensure traefik service is stopped before traefik update
   service:
     name: traefik
